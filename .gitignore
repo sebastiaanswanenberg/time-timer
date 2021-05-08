@@ -1,0 +1,15 @@
+# Dependency directory
+node_modules/**/*
+
+# Build
+build/**/*
+
+# API keys and secrets
+.env
+
+# Editors
+.idea
+*.iml
+
+# Packages
+package-lock.json
