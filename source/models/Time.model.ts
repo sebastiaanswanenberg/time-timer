@@ -4,7 +4,8 @@ const TimeSchema: Schema = new Schema(
     {
         StartTime: { type: Date, required: true},
         EndTime: { type: Date},
-        child: [UserSchema], [ProjectSchema]
+        user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        project: {type: mongoose.Schema.Types.ObjectId, ref: 'Project'}
     },
     {
         timestamps: true

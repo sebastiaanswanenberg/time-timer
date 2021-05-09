@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import IClient from './Client.Interface';
 
 const ClientSchema: Schema = new Schema(
     {
@@ -9,4 +10,4 @@ const ClientSchema: Schema = new Schema(
     }
 );
 
-export default mongoose.model<Client>('Client', ClientSchema);
+export default mongoose.model<IClient>('Client', ClientSchema);

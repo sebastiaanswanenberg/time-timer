@@ -1,10 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
+import IProject from './Project.interface';
 
 const ProjectSchema: Schema = new Schema(
     {
         _id: { type: String, alias: 'Projectname'},
-        children: [TeamSchema],
-        child: [ClientSchema]
+        teams: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
+        client: {type: mongoose.Schema.Types.ObjectId, ref: 'Client'}
     },
     {
         timestamps: true
