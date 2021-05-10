@@ -5,8 +5,8 @@ import IUser from './User.Interface';
 const UserSchema: Schema = new Schema(
     {
         _id: { type: String, alias: 'Username'},
-        password: { type: String, required: true },
-        role: { type: String, required: true }
+        Password: { type: String, required: true },
+        Userrole: { type: String, enum : Role , default: 'user'}
     },
     {
         timestamps: true

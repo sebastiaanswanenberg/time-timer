@@ -1,9 +1,10 @@
 import { Document } from 'mongoose';
-import IUser from './User.Interface';
 
 export default interface ITeam extends Document {
-    Teamname: String,
-    Members: Array<IUser>,
+    Totalhours: Number,
+    Totaldeclaredhours: Number,
+    Averagetimeworked: Number,
+    Hoursperteam: Array<Number>,
     createdAt: Date,
     updatedAt: Date
 }

@@ -1,11 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
+import ITime from './Time.Interface';
+import { Timestate } from './Timestate.Enum';
 
 const TimeSchema: Schema = new Schema(
     {
-        StartTime: { type: Date, required: true},
-        EndTime: { type: Date},
-        user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-        project: {type: mongoose.Schema.Types.ObjectId, ref: 'Project'}
+        Starttime: { type: Date, required: true},
+        Endtime: { type: Date},
+        User: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        Project: {type: mongoose.Schema.Types.ObjectId, ref: 'Project'},
+        State: { type: String, enum : Timestate , default: 'new'}
     },
     {
         timestamps: true

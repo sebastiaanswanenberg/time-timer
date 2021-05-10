@@ -4,7 +4,7 @@ import ITeam from './Team.Interface';
 const TeamSchema: Schema = new Schema(
     {
         _id: { type: String, alias: 'Teamname'},
-        members: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+        Members: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
     },
     {
         timestamps: true

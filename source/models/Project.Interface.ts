@@ -4,8 +4,8 @@ import ITeam from './Team.Interface';
 
 export default interface IProject extends Document {
     Projectname: String,
-    teams: Array<ITeam>,
-    client: IClient
+    Teams: Array<ITeam>,
+    Client: IClient
     createdAt: Date,
     updatedAt: Date
 }
