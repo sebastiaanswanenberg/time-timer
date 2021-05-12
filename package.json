@@ -28,8 +28,11 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "lusca": "^1.7.0",
     "mongoose": "^5.12.7",
     "passport": "^0.4.1",
     "swagger-jsdoc": "^7.0.0-rc.6",
@@ -38,8 +41,11 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.10",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.11",
+    "@types/express-session": "^1.17.3",
+    "@types/lusca": "^1.7.0",
     "@types/passport": "^1.0.6",
     "@types/swagger-jsdoc": "^6.0.0",
     "@types/swagger-ui-express": "^4.1.2",

@@ -1,0 +1,21 @@
+{
+    "swaggerDefinition": {
+        "info": {
+            "version": "1.0.0",
+            "title": "A typescript Kanban api.",
+            "description": "A basic implementaion of a node based crud api for use in mobile and desktop applications",
+            "licence": {
+                "name": "MIT",
+                "url": "https://opensource.org/licenses/MIT"
+            },
+            "contact": {
+                "name": "test dev"
+            },
+            "servers": ["http://localhost:80"]
+        }
+    },
+    "apis": ["./build/*.js",
+             "./build/routes/*.js", 
+             "./build/routes/**/*.js",
+             "./build/routes/**/**/.js"]
+}
