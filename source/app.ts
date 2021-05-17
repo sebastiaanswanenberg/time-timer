@@ -1,4 +1,4 @@
-import express, { NextFunction } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -12,6 +12,14 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import config from './config/config';
 import Logger from './util/logging';
 import Router from './router';
+
+import passport from 'passport';
+import passportLocal from 'passport-local';
+import passportJWT, { ExtractJwt } from 'passport-jwt';
+import { NativeError } from "mongoose";
+
+import User from './models/User.model';
+import IUser from './models/User.Interface';
 
 
 /**
@@ -76,7 +84,67 @@ class App {
             });
     };
 
-    private PassportSetup = () => {};
+    private PassportSetup = () => {
+        const LocalStrategy = passportLocal.Strategy;
+        const JWTStrategy = passportJWT.Strategy;
+        
+        passport.serializeUser<any, any>((req, user, done) => {
+            done(undefined, user);
+        });
+
+        passport.deserializeUser((id, done) => {
+            User.findById(id, (err: NativeError, user: IUser) => done(err, user));
+        });
+
+        passport.use('local-signup', new LocalStrategy((username: string, password:string, done) => {
+            process.nextTick(() => {
+                User.findOne({ 'username': username }, (err: any, user: IUser) => {
+                    //Some random error
+                    if(err) return done(err);
+
+                    //User already exists
+                    if(user) return done({message: 'Username is already taken'});
+
+                    const newuser = new User();
+
+                    newuser.Username = username;
+                    newuser.Password = newuser.generateHash(password);
+                    
+                    newuser
+                        .save(() => {
+                            done(null, newuser)
+                        });
+                }).catch((err) => {
+                    done(err);
+                });
+            })
+        }));
+
+        passport.use('local-login', new LocalStrategy((username: string, password:string, done) => {
+            User.findOne({ 'username': username }, (err: any, user: IUser) => {
+                if (!user || !user.comparePassword(password)) return done(null, false);
+
+                return done(null, user);
+            }).catch((err) => {
+                done(err);
+            });
+        }));
+
+        passport.use('jwt', new JWTStrategy({
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+                secretOrKey: config.server.token.secret
+            }, (jwtPayload, done) => {
+                return User.findOne({username: jwtPayload.username})
+                    .then(user => {
+                        return done(null, user);
+                    })
+                    .catch(err => {
+                        return done(err);
+                    });
+            }
+        ));
+
+    };
 }
 
 export default App;
