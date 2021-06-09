@@ -6,9 +6,9 @@ import lusca from 'lusca';
 import session from 'express-session';
 import path from 'path';
 
-import swaggerUi from 'swagger-ui-express';
-import * as swaggerDocument from './config/swagger.json';
-import swaggerJSDoc from 'swagger-jsdoc';
+//import swaggerUi from 'swagger-ui-express';
+//import * as swaggerDocument from './config/swagger.json';
+//import swaggerJSDoc from 'swagger-jsdoc';
 
 import config from './config/config';
 import Logger from './util/logging';
@@ -37,11 +37,11 @@ import IUser from './models/User.Interface';
 class App {
     private NAMESPACE: string = 'SERVER';
     private httpServer: any;
-    private SwaggerDoc: any;
+    //private SwaggerDoc: any;
 
     constructor() {
         this.httpServer = express();
-        this.SwaggerDoc = swaggerJSDoc(swaggerDocument);
+        //this.SwaggerDoc = swaggerJSDoc(swaggerDocument);
 
         this.DatabaseSetup();
         this.PassportSetup();
@@ -63,7 +63,7 @@ class App {
 
         new Router(this.httpServer);
 
-        this.httpServer.use('/documentation', swaggerUi.serve, swaggerUi.setup(this.SwaggerDoc));
+        //this.httpServer.use('/documentation', swaggerUi.serve, swaggerUi.setup(this.SwaggerDoc));
     }
 
     public Start = (port: number) => {
