@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import lusca from 'lusca';
 import session from 'express-session';
+import path from 'path';
 
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerDocument from './config/swagger.json';
@@ -18,7 +19,7 @@ import passportLocal from 'passport-local';
 import passportJWT, { ExtractJwt } from 'passport-jwt';
 import { NativeError } from "mongoose";
 
-import User from './models/User.model';
+import User from './models/User.Model';
 import IUser from './models/User.Interface';
 
 
@@ -44,7 +45,8 @@ class App {
 
         this.DatabaseSetup();
         this.PassportSetup();
-
+        
+        this.httpServer.use(express.static(path.join(__dirname, 'public')));
         this.httpServer.use(bodyParser.urlencoded({ extended: true }));
         this.httpServer.use(bodyParser.json());
         this.httpServer.use(cors());
@@ -57,6 +59,7 @@ class App {
         );
         this.httpServer.use(lusca.xframe('SAMEORIGIN'));
         this.httpServer.use(lusca.xssProtection(true));
+
 
         new Router(this.httpServer);
 
