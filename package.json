@@ -4,8 +4,7 @@
   "description": "Time api",
   "main": "source/server.ts",
   "scripts": {
-    "start": "ts-node source/server.ts",
-    "dev": "nodemon -x ts-node source/server.ts"
+    "start": "tsc && nodemon build/server.js"
   },
   "keywords": [
     "typescript",
