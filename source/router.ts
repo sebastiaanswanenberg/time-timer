@@ -46,10 +46,9 @@ class Router {
         router.use('/test', (req, res) =>
         {
             res.status(200)
-                .json({
+                .send({
                     message: "IT WORKS!"
-                })
-                .send()
+                });
         });
 
 

@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+    api:
+        image: mijnfalendenodeapp
+        container_name: nodeapp
+        ports:
+            - '80:80'
+        restart: always
