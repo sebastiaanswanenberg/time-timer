@@ -59,6 +59,12 @@ const KEYS = {
         clientId: '',
         clientSecret: ''
     },
+    deepai: {
+        apiKey: ''
+    },
+    imgbb: {
+        apiKey: 'da9dfad7acf0117fe92561df3e6d45da'
+    },
     session: {
         cookieKey: 'thenetninjaisawesomeiguess'
     }

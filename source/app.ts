@@ -19,7 +19,7 @@ import passportLocal from 'passport-local';
 import passportJWT, { ExtractJwt } from 'passport-jwt';
 import { NativeError } from "mongoose";
 
-import User from './models/User.Model';
+import UserModel from './models/User.Model';
 import IUser from './models/User.Interface';
 
 
@@ -96,19 +96,19 @@ class App {
         });
 
         passport.deserializeUser((id, done) => {
-            User.findById(id, (err: NativeError, user: IUser) => done(err, user));
+            UserModel.findById(id, (err: NativeError, user: IUser) => done(err, user));
         });
 
         passport.use('local-signup', new LocalStrategy((username: string, password:string, done) => {
             process.nextTick(() => {
-                User.findOne({ 'username': username }, (err: any, user: IUser) => {
+                UserModel.findOne({ 'username': username }, (err: any, user: IUser) => {
                     //Some random error
                     if(err) return done(err);
 
                     //User already exists
                     if(user) return done({message: 'Username is already taken'});
 
-                    const newuser = new User();
+                    const newuser: IUser = new UserModel();
 
                     newuser.Username = username;
                     newuser.Password = newuser.generateHash(password);
@@ -124,7 +124,7 @@ class App {
         }));
 
         passport.use('local-login', new LocalStrategy((username: string, password:string, done) => {
-            User.findOne({ 'username': username }, (err: any, user: IUser) => {
+            UserModel.findOne({ 'username': username }, (err: any, user: IUser) => {
                 if (!user || !user.comparePassword(password)) return done(null, false);
 
                 return done(null, user);
@@ -137,7 +137,7 @@ class App {
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
                 secretOrKey: config.server.token.secret
             }, (jwtPayload, done) => {
-                return User.findOne({username: jwtPayload.username})
+                return UserModel.findOne({username: jwtPayload.username})
                     .then(user => {
                         return done(null, user);
                     })

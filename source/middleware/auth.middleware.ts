@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import IUser from "../models/User.Interface";
 
-export default function (req: Request, res: Response, next: NextFunction) {
+function authentication(req: Request, res: Response, next: NextFunction) {
     let { user } = req.body;
 
     if (isUser(user)) {
@@ -17,3 +17,5 @@ function isUser(obj: any): obj is IUser {
         && typeof obj.Password === "string"
         && typeof obj.Admin === "boolean";
 };
+
+export default authentication;
