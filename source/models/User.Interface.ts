@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import IImage from './Image.Interface';
 
 export default interface IUser extends Document {
     comparePassword(password: string): boolean;
@@ -6,6 +7,7 @@ export default interface IUser extends Document {
     Username: string,
     Password: string,
     Admin: Boolean,
+    images: Array<IImage>,
     createdAt: Date,
     updatedAt: Date
 }

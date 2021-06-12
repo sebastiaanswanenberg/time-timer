@@ -18,13 +18,13 @@ import IUser from '../models/User.Interface';
 import IGame from '../models/Game.Interface';
 import IUserGame from '../models/UserGame.Interface';
 
-import Jsontoxml from '../middleware/jsontoxml.middleware';
 import config from '../config/config';
 import fileUpload from 'express-fileupload';
 import UserGameModel from '../models/UserGame.Model';
 import UserModel from '../models/User.Model';
 import GameModel from '../models/Game.Model';
 import ImageModel from '../models/Image.Model';
+import Controller from './Standard.Controller';
 
 /**
  * Deep ai controller functions.
@@ -36,7 +36,7 @@ import ImageModel from '../models/Image.Model';
  * @returns deepai controller
  */
 
-class DeepAiController {
+class DeepAiController extends Controller {
     createUserGame(image:any, gameid:any, username:string) {
         return new Promise((resolve, reject) => {
             //Set some variables we will need later.

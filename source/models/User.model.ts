@@ -6,7 +6,7 @@ const UserSchema: Schema<IUser> = new Schema(
     {
         _id: { type: String, alias: 'Username'},
         Password: { type: String, required: true },
-        Admin: {type: Boolean, required: true, default: false},
+        Admin: {type: Boolean, default: false},
         images: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}]
     },
     {
