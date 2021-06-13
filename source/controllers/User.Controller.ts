@@ -2,10 +2,63 @@ import Controller from './Standard.Controller';
 
 import IUser from '../models/User.Interface';
 import UserModel from '../models/User.Model';
+import UserGameModel from '../models/UserGame.Model';
+import ImageModel from '../models/Image.Model';
 
 class UserController extends Controller {
     constructor() {
         super();
+    }
+
+    getCurrentUserScore(username: any) {
+        return new Promise((resolve, reject) => {
+            let total:number = 0;
+            UserModel
+                .findOne(username)
+                .then((user) => {
+                    if(!user) reject();
+                    else 
+                    {
+                        UserGameModel
+                            .find({player: user})
+                            .then((usergames) => {
+                                usergames
+                                    .forEach(usergame => {
+                                        total += usergame.points;
+                                    });
+
+                                resolve(total);
+                            })
+                    }
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        });
+    }
+
+    getCurrentUserUploads(username: any) {
+        return new Promise((resolve, reject) => {
+            UserModel
+                .findOne(username)
+                .then((user) => {
+                    if(!user) reject();
+                    else 
+                    {
+                        ImageModel
+                            .find({user: user})
+                            .then((images) => {
+                                resolve(images)
+                            })
+                            .catch((err) => {
+                                reject(err)
+                            })
+                    }
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        });
     }
 
     getUsers() {
@@ -16,7 +69,7 @@ class UserController extends Controller {
                     return resolve(users);
                 })
                 .catch(err => {
-                    reject(err);
+                    return reject(err);
                 });
         });
     }

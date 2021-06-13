@@ -1,0 +1,803 @@
+{
+	"info": {
+		"_postman_id": "5923b032-62b0-453c-8409-8f708052b2b9",
+		"name": "User operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login as admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    pm.collectionVariables.set('authToken', pm.response.json().result.token)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Nurleyanti\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as regular user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    pm.collectionVariables.set('authToken', pm.response.json().result.token)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test1234\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup new user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test12345\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/auth/signup",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getallusers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    pm.collectionVariables.set('userId', pm.response.json().result[0]._id)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/users/",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getuserby id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/users/{{userId}}",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Pietje puk\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/users/{{userId}}",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users paginated",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "filterName",
+									"value": "test5",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/users/all",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "games",
+			"item": [
+				{
+					"name": "get 3 levels deep",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games/{{gameId}}/images/{{targetId}}/users/{{initialuserId}}",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games",
+								"{{gameId}}",
+								"images",
+								"{{targetId}}",
+								"users",
+								"{{initialuserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get my target hints",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games/mytargets/{{targetId}}/hints",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games",
+								"mytargets",
+								"{{targetId}}",
+								"hints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getmytargets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    pm.collectionVariables.set('targetId', pm.response.json().result[0]._id)\r",
+									"    pm.collectionVariables.set('initialuserId', pm.response.json().result[0].user)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games/mytargets",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games",
+								"mytargets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get my target by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games/mytargets/{{targetId}}",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games",
+								"mytargets",
+								"{{targetId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update my target",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Updated kitty\",\r\n    \"description\": \"A kitty\",\r\n    \"hints\": [\"Doggo\", \"Cat\", \"Fifth hint\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games/mytargets/{{targetId}}",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games",
+								"mytargets",
+								"{{targetId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game try",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "sampleFile",
+									"type": "file",
+									"src": "/C:/Users/yanti/OneDrive/Afbeeldingen/009c88c7b5d5dd8aaaae7452485c7a1287c767e9_full.jpg"
+								},
+								{
+									"key": "id",
+									"value": "{{gameId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games/try",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games",
+								"try"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get games",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    pm.collectionVariables.set('gameId', pm.response.json().result[0]._id)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my score",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/me/uploads",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"me",
+								"uploads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get neartargets",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "long",
+									"value": "51.69611",
+									"type": "text"
+								},
+								{
+									"key": "lat",
+									"value": "5.26815",
+									"type": "text"
+								},
+								{
+									"key": "maxDistance",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "{{userId}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "imageId",
+									"value": "{{targetId}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "xml",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/games/nearTargets",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"games",
+								"nearTargets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "images",
+			"item": [
+				{
+					"name": "postinitial",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "xml",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "example",
+									"type": "file",
+									"src": "/C:/Users/yanti/OneDrive/Afbeeldingen/009c88c7b5d5dd8aaaae7452485c7a1287c767e9_full.jpg"
+								},
+								{
+									"key": "image",
+									"value": "{\n    \"title\": \"New test\",\n    \"description\": \"New test\",\n    \"hints\": [\"hint1\", \"extra hint\", \"hint3\"]\n}",
+									"type": "text"
+								},
+								{
+									"key": "lat",
+									"value": "5.11111",
+									"type": "text"
+								},
+								{
+									"key": "long",
+									"value": "51.70000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/images/postinitial",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"images",
+								"postinitial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My uploads",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://quiet-fortress-66933.herokuapp.com/me/uploads",
+							"protocol": "https",
+							"host": [
+								"quiet-fortress-66933",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"me",
+								"uploads"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "authToken",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "targetId",
+			"value": ""
+		},
+		{
+			"key": "initialuserId",
+			"value": ""
+		},
+		{
+			"key": "gameId",
+			"value": ""
+		}
+	]
+}

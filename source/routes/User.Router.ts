@@ -127,7 +127,7 @@ Router.put('/:username', (req: Request, res: Response, next: NextFunction) => {
  *       404:
  *         description: The user was not found.
  */
-Router.delete('/:username', function (req, res, next) {
+Router.delete('/:username', (req: Request, res: Response, next: NextFunction) => {
     let { username } = req.body;
 
     _userController

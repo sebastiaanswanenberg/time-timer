@@ -7,5 +7,5 @@ export default interface IUserGame extends Document {
     player: IUser,
     game: IGame,
     image: IImage,
-    points: Number
+    points: number
 }
